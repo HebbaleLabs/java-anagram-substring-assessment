@@ -15,7 +15,7 @@ public class Anagram {
   }
 
   public static void main(String[] args) {
-    String input = "abcb";
+    String input = "Harsha";
     System.out.println(countChanges(input));
   }
 }

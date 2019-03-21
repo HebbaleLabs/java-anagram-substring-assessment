@@ -1,54 +1,45 @@
 package com.talfinder.assessment;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  * Created by shashidhara on 2/23/19.
  */
+@RunWith(Parameterized.class)
 public class AnagramTest {
 
-  @Test
-  public void countChangesSimpleStrings() {
-    int countChanges = Anagram.countChanges("ab");
-    Assert.assertEquals(1, countChanges);
+  @Parameters
+  public static Collection<Object[]> parameters() {
+    return Arrays.asList(new Object[][] {
+        {"ab", 1},
+        {"abcb", 1},
+        {"abcdea", 2},
+        {"dnqaurlplofnrtmh", 5},
+        {"hhpddlnnsjfoyxpciioigvjqzfbpllssuj", 10},
+        {"xulkowreuowzxgnhmiqekxhzistdocbnyozmnqthhpievvlj", 13},
+        {"aujteqimwfkjoqodgqaxbrkrwykpmuimqtgulojjwtukjiqrasqejbvfbixnchzsahpnyayutsgecwvcqngzoehrmeeqlgknnb", 26},
+        {"drngbjuuhmwqwxrinxccsqxkpwygwcdbtriwaesjsobrntzaqbe", -1},
+        {"gqdvlchavotcykafyjzbbgmnlajiqlnwctrnvznspiwquxxsiwuldizqkkaawpyyisnftdzklwagv", -1}
+    });
+  }
 
-    countChanges = Anagram.countChanges("abcb");
-    Assert.assertEquals(1, countChanges);
+  String input;
+  int expectedValue;
 
-    countChanges = Anagram.countChanges("abcdea");
-    Assert.assertEquals(2, countChanges);
-
+  public AnagramTest(String input, int expectedValue) {
+    this.input = input;
+    this.expectedValue = expectedValue;
   }
 
   @Test
-  public void countChangesComplexStrings() {
-    int countChanges = Anagram.countChanges("dnqaurlplofnrtmh");
-    Assert.assertEquals(5, countChanges);
-
-    countChanges = Anagram.countChanges("hhpddlnnsjfoyxpciioigvjqzfbpllssuj");
-    Assert.assertEquals(10, countChanges);
-
-    countChanges = Anagram.countChanges("xulkowreuowzxgnhmiqekxhzistdocbnyozmnqthhpievvlj");
-    Assert.assertEquals(13, countChanges);
-
-    countChanges = Anagram.countChanges("aujteqimwfkjoqodgqaxbrkrwykpmuimqtgulojjwtukjiqrasqejbvfbixnchzsahpnyayutsgecwvcqngzoehrmeeqlgknnb");
-    Assert.assertEquals(26, countChanges);
-  }
-
-  @Test
-  public void countChangesInvalidStrings() {
-    int countChanges = Anagram.countChanges("abc");
-    Assert.assertEquals(-1, countChanges);
-
-    countChanges = Anagram.countChanges("abcde");
-    Assert.assertEquals(-1, countChanges);
-
-    countChanges = Anagram.countChanges("drngbjuuhmwqwxrinxccsqxkpwygwcdbtriwaesjsobrntzaqbe");
-    Assert.assertEquals(-1, countChanges);
-
-    countChanges = Anagram.countChanges("gqdvlchavotcykafyjzbbgmnlajiqlnwctrnvznspiwquxxsiwuldizqkkaawpyyisnftdzklwagv");
-    Assert.assertEquals(-1, countChanges);
-
+  public void countChanges() {
+    Assert.assertEquals("input:" + input, expectedValue, Anagram.countChanges(input));
   }
 }
